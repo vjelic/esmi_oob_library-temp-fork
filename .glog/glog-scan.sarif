@@ -1,0 +1,448 @@
+{
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Glog.AI",
+          "organization": "Glog.AI",
+          "fullName": "Glog, Making software more secure",
+          "version": "1.0.0",
+          "semanticVersion": "1.0.0",
+          "informationUri": "https://www.glog.ai",
+          "rules": [
+            {
+              "id": "glog-4bd0c70d-7743-4a84-9e4c-8b78413e4a58",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-83c69bc5-1345-4981-99e2-788f53c3ea7d",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe or deprecated functions are used in the code. These functions, such as `atof`, do not provide error handling and can lead to undefined behavior, security vulnerabilities, or incorrect program execution. The `atof` function, specifically, converts a string to a floating-point number but does not handle errors like invalid input or overflow, which can lead to unpredictable results.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, avoid using unsafe functions like `atof`. Instead, use safer alternatives that provide error handling and are more robust against malformed input. For converting strings to floating-point numbers, consider using `std::stof`, `std::stod`, or `std::stold` from the C++ Standard Library, which throw exceptions on errors.\n\n### Source Code Fix Recommendation\n\nReplace the use of `atof` with `std::stod` to ensure proper error handling and input validation.\n\n#### Original Code Example\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for atof\n\nint main() {\n    const char* str = \"123.45\";\n    double num = atof(str);\n    std::cout << \"Number: \" << num << std::endl;\n    return 0;\n}\n```\n\n#### Fixed Code Example\n\n```cpp\n#include <iostream>\n#include <string> // Required for std::string and std::stod\n#include <stdexcept> // Required for std::invalid_argument and std::out_of_range\n\nint main() {\n    const std::string str = \"123.45\";\n    try {\n        double num = std::stod(str);\n        std::cout << \"Number: \" << num << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: \" << e.what() << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Input out of range: \" << e.what() << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the fixed code example, the following standard library headers are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using `std::string` and `std::stod`.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration (CWE-676): Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-c91ac35e-c952-4f00-86e7-55a1b630e206",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-83dbec34-6e36-464f-a22e-dfece646d787",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-6fbe38e9-a54b-4b7e-a967-43280d3e023c",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-4c59941d-918d-49fa-b7be-498ab2f3a397",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-c68a8657-14dd-48aa-bae8-986fa5e4c8ff",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe or deprecated functions are used in the code. These functions, such as `atof`, do not provide error handling and can lead to undefined behavior, security vulnerabilities, or incorrect program execution. The `atof` function, specifically, converts a string to a floating-point number but does not handle errors like invalid input or overflow, which can lead to unpredictable results.\n\n### General Mitigation Advice\n\nTo mitigate this vulnerability, avoid using unsafe functions like `atof`. Instead, use safer alternatives that provide error handling and are more robust against malformed input. For converting strings to floating-point numbers, consider using `std::stof`, `std::stod`, or `std::stold` from the C++ Standard Library, which throw exceptions on errors.\n\n### Source Code Fix Recommendation\n\nReplace the use of `atof` with `std::stod` to ensure proper error handling and input validation.\n\n#### Original Code Example\n\n```cpp\n#include <iostream>\n#include <cstdlib> // Required for atof\n\nint main() {\n    const char* str = \"123.45\";\n    double num = atof(str);\n    std::cout << \"Number: \" << num << std::endl;\n    return 0;\n}\n```\n\n#### Fixed Code Example\n\n```cpp\n#include <iostream>\n#include <string> // Required for std::string and std::stod\n#include <stdexcept> // Required for std::invalid_argument and std::out_of_range\n\nint main() {\n    const std::string str = \"123.45\";\n    try {\n        double num = std::stod(str);\n        std::cout << \"Number: \" << num << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: \" << e.what() << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Input out of range: \" << e.what() << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the fixed code example, the following standard library headers are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using `std::string` and `std::stod`.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Resources\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration (CWE-676): Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)"
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            },
+            {
+              "id": "glog-b98b473e-4d0b-4832-8a3e-5c0177332b8c",
+              "help": {
+                "text": "",
+                "markdown": "### Description\n\nThe \"Detection of Prohibited C Function\" vulnerability in C++ programming arises when unsafe functions from the C standard library are used. These functions, such as `atoi`, do not provide error handling and can lead to undefined behavior, crashes, or security vulnerabilities if they process unexpected input. The `atoi` function, in particular, converts a string to an integer but does not handle errors like non-numeric input or overflow, which can lead to incorrect program behavior or security issues.\n\n### General Mitigation Advice\n\nTo mitigate the risks associated with using `atoi`, it is recommended to use safer alternatives that provide error handling. In C++, the `std::stoi` function is a better choice as it throws exceptions on errors, allowing the program to handle them gracefully.\n\n### Source Code Fix Recommendation\n\nReplace the usage of `atoi` with `std::stoi` to ensure proper error handling. Here's an example of how to refactor the code:\n\n```cpp\n#include <iostream>\n#include <string>\n#include <stdexcept>\n\nint main() {\n    std::string input = \"123\";\n    try {\n        int number = std::stoi(input);\n        std::cout << \"Converted number: \" << number << std::endl;\n    } catch (const std::invalid_argument& e) {\n        std::cerr << \"Invalid input: not a number\" << std::endl;\n    } catch (const std::out_of_range& e) {\n        std::cerr << \"Invalid input: number out of range\" << std::endl;\n    }\n    return 0;\n}\n```\n\n### Library Dependencies\n\nTo execute the above code, the following standard C++ libraries are required:\n\n- `<iostream>`: For input and output stream operations.\n- `<string>`: For using the `std::string` class.\n- `<stdexcept>`: For handling exceptions like `std::invalid_argument` and `std::out_of_range`.\n\n### Relevant Links\n\n- [OWASP Secure Coding Practices - Quick Reference Guide](https://owasp.org/www-project-secure-coding-practices-quick-reference-guide/)\n- [Common Weakness Enumeration - CWE-676: Use of Potentially Dangerous Function](https://cwe.mitre.org/data/definitions/676.html)\n\nThese links are verified to be active and accessible to anonymous users."
+              },
+              "properties": {
+                "tags": [
+                  "DS154189"
+                ]
+              }
+            }
+          ],
+          "language": "en-US",
+          "contents": [
+            "localizedData",
+            "nonLocalizedData"
+          ],
+          "isComprehensive": false
+        }
+      },
+      "language": "en-US",
+      "results": [
+        {
+          "ruleId": "glog-4bd0c70d-7743-4a84-9e4c-8b78413e4a58",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1452,
+                  "startColumn": 10,
+                  "endLine": 1452,
+                  "endColumn": 14,
+                  "charOffset": 46126,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-83c69bc5-1345-4981-99e2-788f53c3ea7d",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1441,
+                  "startColumn": 10,
+                  "endLine": 1441,
+                  "endColumn": 14,
+                  "charOffset": 45801,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atof",
+                    "rendered": {
+                      "text": "atof",
+                      "markdown": "`atof`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-c91ac35e-c952-4f00-86e7-55a1b630e206",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1461,
+                  "startColumn": 10,
+                  "endLine": 1461,
+                  "endColumn": 14,
+                  "charOffset": 46339,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-83dbec34-6e36-464f-a22e-dfece646d787",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1447,
+                  "startColumn": 10,
+                  "endLine": 1447,
+                  "endColumn": 14,
+                  "charOffset": 45992,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-6fbe38e9-a54b-4b7e-a967-43280d3e023c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1426,
+                  "startColumn": 25,
+                  "endLine": 1426,
+                  "endColumn": 29,
+                  "charOffset": 45387,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-4c59941d-918d-49fa-b7be-498ab2f3a397",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1425,
+                  "startColumn": 21,
+                  "endLine": 1425,
+                  "endColumn": 25,
+                  "charOffset": 45338,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-c68a8657-14dd-48aa-bae8-986fa5e4c8ff",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1435,
+                  "startColumn": 10,
+                  "endLine": 1435,
+                  "endColumn": 14,
+                  "charOffset": 45609,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atof",
+                    "rendered": {
+                      "text": "atof",
+                      "markdown": "`atof`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        },
+        {
+          "ruleId": "glog-b98b473e-4d0b-4832-8a3e-5c0177332b8c",
+          "kind": "fail",
+          "level": "warning",
+          "message": {
+            "text": "Banned C function detected"
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "tools/mi300_tool.c"
+                },
+                "region": {
+                  "startLine": 1407,
+                  "startColumn": 21,
+                  "endLine": 1407,
+                  "endColumn": 25,
+                  "charOffset": 44829,
+                  "charLength": 4,
+                  "snippet": {
+                    "text": "atoi",
+                    "rendered": {
+                      "text": "atoi",
+                      "markdown": "`atoi`"
+                    }
+                  },
+                  "sourceLanguage": "c"
+                }
+              }
+            }
+          ],
+          "properties": {
+            "DevSkimSeverity": "Moderate",
+            "DevSkimConfidence": "High",
+            "tags": [
+              "API.DangerousAPI.BannedFunction"
+            ]
+          }
+        }
+      ],
+      "newlineSequences": [
+        "\r\n",
+        "\n"
+      ]
+    }
+  ]
+}
